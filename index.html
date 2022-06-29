@@ -9,13 +9,14 @@
             <h2> Log In! </h2>
             <input v-model="usernameInput" placeholder="username / email"><br>
             <input v-model="passwordInput" placeholder="password"><br>
-            <button>Log In</button>
+            
+            <button @click="postSession">Log In</button>
         </div>
         <br><br>
         <div id = "registration-box">
             <h2> Make New Account: </h2>
             <input v-model="newEmailInput" placeholder="new email"><br>
-            <input v-model="newPassword" placeholder="new password"><br>
+            <input v-model="newPasswordInput" placeholder="new password"><br>
             <input v-model="newFullNameInput" placeholder="full name"><br>
             <button>Create New Account</button>
         </div>
