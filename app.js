@@ -69,27 +69,34 @@ var app = new Vue({
         }},
 
         postUser: async function () {
-            if (this.newEmailInput == null) {
-                console.log("Please enter an email address");
-                return
-            } else if (this.newPasswordInput == null) {
-                console.log("Please enter a new password");
-                return
-            } else if (this.newFullNameInput == null) {
-                console.log("Please enter your full name");
-                return
-            } else {
-                console.log("Credentials can be accepted. Account created.")
-                }
+            if (this.newEmailInput != "") {
+                if (this.newPasswordInput != "") {
+                    if (this.newFullNameInput != "") {
+                        console.log("Credentials can be accepted. Account created.")
+                        let newAccountCredentials = {
+                            newEmail: this.newEmailInput,
+                            newPassword: this.newPasswordInput,
+                            newFullName: this.newFullNameInput
+                        };
+                        this.newEmailInput = "";
+                        this.newPasswordInput = "";
+                        this.newFullNameInput = "";
 
-            },
-
-
-
-
-
-
+                        let response = await fetch(URL + "/user", {
+                            method: "POST",
+                            body: json.stringify(newAccountCredentials),
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            credentials: "include"
+                        });
+                        
+                    } else { console.log("Please enter your full name")};
+                } else { console.log("Please enter a valid password.")};
+            } else { console.log("Please enter a valid email address")};
+        },
     },
+
     created: function () {
         this.getSession();
     }
