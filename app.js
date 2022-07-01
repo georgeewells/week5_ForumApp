@@ -11,6 +11,8 @@ var app = new Vue({
         newFullNameInput: "",
 
         loginMessage: "",
+
+        page: "loginPage",
     },
     methods: {
         getSession: async function () {
@@ -57,6 +59,7 @@ var app = new Vue({
             if  (response.status == 201) {
                 //logged in!
                 console.log("Logged in!");
+                this.page = "forumPage";
             } else if (response.status == 401) {
                 //not logged in :(
                 console.log("Not logged in.");
@@ -74,23 +77,30 @@ var app = new Vue({
                     if (this.newFullNameInput != "") {
                         console.log("Credentials can be accepted. Account created.")
                         let newAccountCredentials = {
-                            newEmail: this.newEmailInput,
-                            newPassword: this.newPasswordInput,
-                            newFullName: this.newFullNameInput
+                            "username": this.newEmailInput,
+                            "password": this.newPasswordInput,
+                            "fullname": this.newFullNameInput
                         };
                         this.newEmailInput = "";
                         this.newPasswordInput = "";
                         this.newFullNameInput = "";
 
+                        // let response = await fetch(URL + "/session", {
+                        //     method: "POST",
+                        //     body: JSON.stringify(loginCredentials),
+                        //     headers: {
+                        //         "Content-Type": "application/json"
+                        //     },
+                        //     credentials: "include"
+
                         let response = await fetch(URL + "/user", {
                             method: "POST",
-                            body: json.stringify(newAccountCredentials),
+                            body: JSON.stringify(newAccountCredentials),
                             headers: {
                                 "Content-Type": "application/json"
                             },
-                            credentials: "include"
+                            credentials: "include",
                         });
-                        
                     } else { console.log("Please enter your full name")};
                 } else { console.log("Please enter a valid password.")};
             } else { console.log("Please enter a valid email address")};
@@ -98,6 +108,15 @@ var app = new Vue({
     },
 
     created: function () {
-        this.getSession();
+        //this.getSession();
     }
 });
+
+
+//=================STEPS:==============================
+//
+//   - POST user credentials, allow specific login
+//   - Create second homescreen that only shows when you're logged in
+//   - Pull from API database, print the other threads
+//   - 
+//
