@@ -24,6 +24,15 @@
         </div>
         <div id = "forumPage" v-if="page === 'forumPage'">
             <h1>Forum Page</h1>
+            <br><br><br>
+            
+            <!-- Start here - forum list isn't printing yet. -->
+            <div id = "forumList" v-for="thread in threadList">
+                {{ thread.name }}
+                {{ thread.description }}
+                {{ thread.category }}
+
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

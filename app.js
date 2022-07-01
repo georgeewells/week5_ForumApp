@@ -13,6 +13,8 @@ var app = new Vue({
         loginMessage: "",
 
         page: "loginPage",
+
+        threadList: [],
     },
     methods: {
         getSession: async function () {
@@ -25,6 +27,8 @@ var app = new Vue({
             if (response.status == 200) {
                 //logged in!
                 console.log("logged in");
+                this.page = "forumPage";
+                printThreadList();
             } else if (response.status == 400) {
                 //not logged in.
                 console.log("not logged in");
@@ -105,10 +109,27 @@ var app = new Vue({
                 } else { console.log("Please enter a valid password.")};
             } else { console.log("Please enter a valid email address")};
         },
+        //Start here - thread list isn't printing yet. 
+        printThreadList: async function () {
+            let response = await fetch(URL + "/thread", { 
+                credentials: "include"
+            });
+
+            //check response status
+            if (response.status == 200) {
+                console.log("Thread return status 200: all good.")
+                let body = await response.json();
+                this.threadList = body;
+            } else {
+                console.log("Thread retrieve status: "+response.status+" "+response)
+            };
+
+
+        },
     },
 
     created: function () {
-        //this.getSession();
+        this.getSession();
     }
 });
 
