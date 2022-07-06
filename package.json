@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/georgeewells/week5_NewRepo/issues"
   },
-  "homepage": "https://github.com/georgeewells/week5_NewRepo#readme"
+  "homepage": "https://github.com/georgeewells/week5_NewRepo#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "mongoose": "^6.4.3"
+  }
 }

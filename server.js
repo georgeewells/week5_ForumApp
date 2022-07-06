@@ -1,3 +1,5 @@
+//Create all app request functions (app.get, app.post, app.delete) in this file, and export "app"
+
 const express = require("express")
 //calls in express
 
