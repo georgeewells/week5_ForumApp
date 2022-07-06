@@ -10,7 +10,6 @@
                 <h2> Log In! </h2>
                 <input v-model="usernameInput" placeholder="username / email"><br>
                 <input v-model="passwordInput" placeholder="password"><br>
-
                 <button @click="postSession">Log In</button>
             </div>
             <br><br>
@@ -19,7 +18,8 @@
                 <input v-model="newEmailInput" placeholder="new email"><br>
                 <input v-model="newPasswordInput" placeholder="new password"><br>
                 <input v-model="newFullNameInput" placeholder="full name"><br>
-                <button @click="postUser">Create New Account</button>
+                <button @click="postUser">Create New Account</button> <br>
+                <p> {{createAccountMessage}} </p>  
             </div>
         </div>
         <div id = "forumPage" v-if="page === 'forumPage'">

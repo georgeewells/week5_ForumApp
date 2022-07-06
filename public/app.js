@@ -1,5 +1,15 @@
 const URL = "https://forum2022.codeschool.cloud"
 
+// Vue.component("thread", {
+//     template:`
+//     <div id = 'threads'>
+//      <div id = 'post' v-for 
+
+//     `
+// })
+
+
+
 var app = new Vue({
     el: "#app",
     data: {
@@ -11,6 +21,7 @@ var app = new Vue({
         newFullNameInput: "",
 
         loginMessage: "",
+        createAccountMessage: " ",
 
         page: "loginPage",
 
@@ -28,6 +39,7 @@ var app = new Vue({
                 //logged in!
                 console.log("logged in");
                 this.page = "forumPage";
+//Start here - printThreadList() isnt working.
                 printThreadList();
             } else if (response.status == 400) {
                 //not logged in.
@@ -105,6 +117,14 @@ var app = new Vue({
                             },
                             credentials: "include",
                         });
+
+                            if (response.status == 500) {
+                                this.createAccountMessage = "Account with this username already exists."
+                                console.log("Response status is "+response.status+". More info: "+response)
+                            } else {
+                                console.log("Response status is "+response.status+". More info: "+response)
+                            }
+// Start here - returning 500 for both invalid email addresses and already taken account info.
                     } else { console.log("Please enter your full name")};
                 } else { console.log("Please enter a valid password.")};
             } else { console.log("Please enter a valid email address")};
@@ -130,6 +150,7 @@ var app = new Vue({
 
     created: function () {
         this.getSession();
+        this.printThreadList();
     }
 });
 
